@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Define project name
-project(demo)
+project(mnist)
 
 #include_directories(../src/libtorch/include)
 #include_directories(../src/libtorch/include/torch/csrc/api/include)
@@ -31,7 +31,7 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
 
 #add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-add_executable(demo main.cpp CRnnDeploy.h)
-target_link_libraries(demo "${TORCH_LIBRARIES}")
-target_link_libraries(demo ${OpenCV_LIBS})
-set_property(TARGET demo PROPERTY CXX_STANDARD 14)
+add_executable(mnist main.cpp CRnnDeploy.h)
+target_link_libraries(mnist "${TORCH_LIBRARIES}")
+target_link_libraries(mnist ${OpenCV_LIBS})
+set_property(TARGET mnist PROPERTY CXX_STANDARD 14)
