@@ -31,7 +31,7 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
 
 #add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-add_executable(mnist main.cpp CRnnDeploy.h)
+add_executable(mnist main.cpp MnistFunc.h)
 target_link_libraries(mnist "${TORCH_LIBRARIES}")
 target_link_libraries(mnist ${OpenCV_LIBS})
 set_property(TARGET mnist PROPERTY CXX_STANDARD 14)

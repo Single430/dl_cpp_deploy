@@ -1,7 +1,7 @@
 /*
  * crnn
 */
-#include "CRnnDeploy.h"
+#include "MnistFunc.h"
 
 using namespace std;
 
