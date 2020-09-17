@@ -4,12 +4,18 @@
 
 ## 目录介绍
 
+### mnist_cpp
 ```
 9:30                mnist    mnist python 训练代码
 15:08      CMakeLists.txt    cmake文件
 21:39        CRnnDeploy.h
 17:07            main.cpp    main函数
 16:47              run.sh    构建sh
+```
+
+### yolov5_cpp
+```
+weights/last.torchscript.pt
 ```
 
 ## 环境搭建步骤
