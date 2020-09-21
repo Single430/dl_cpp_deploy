@@ -1,6 +1,6 @@
 ## 项目目的
 
-用 C++ 部署 pytorch 训练的 mnist 模型
+用 C++ 部署 pytorch 训练的 mnist，yolov5s 模型
 
 ## 目录介绍
 
