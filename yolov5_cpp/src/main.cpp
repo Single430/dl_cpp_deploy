@@ -34,9 +34,13 @@ void Demo(cv::Mat& img,
     cv::Rect box;
     float score;
     int class_idx;
+    int r = random(255);
+    int g = random(255);
+    int b = random(255);
+
     std::tie(box, score, class_idx) = data;
 
-    cv::rectangle(img, box, cv::Scalar(0, 0, 255), 2);
+    cv::rectangle(img, box, cv::Scalar(r, g, b), 2);
 
     if (label) {
       std::stringstream ss;
@@ -47,9 +51,6 @@ void Demo(cv::Mat& img,
       auto font_scale = 0.5;
       int thickness = 1;
       int baseline=0;
-      int r = random(255);
-      int g = random(255);
-      int b = random(255);
       auto s_size = cv::getTextSize(s, font_face, font_scale, thickness, &baseline);
       cv::rectangle(img,
                     cv::Point(box.tl().x, box.tl().y - s_size.height - 5),
