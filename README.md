@@ -18,17 +18,18 @@
 weights/last.torchscript.pt
 ```
 
+## 环境相关
+```
+1.Manjaro系统
+2.gcc7
+3.python3.6.10
+```
+
 ## 环境搭建步骤
 
 ```
 1.下载pytorch c++版：libtorch
 2.安装opencv 可下载源文件自己构建也可直接pacman安装，请注意依赖问题，vtk包等
-```
-
-## 环境相关
-```
-1.gcc7
-2.python3.6.10
 ```
 
 ## 安装过程遇到的问题
