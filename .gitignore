@@ -131,3 +131,5 @@ dmypy.json
 .pyre/
 /cmake-build-debug/
 /run_local.sh
+
+*/cmake-build-debug/

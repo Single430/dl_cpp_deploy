@@ -5,4 +5,4 @@ mkdir build
 cd build
 cmake ..
 make
-./demo --source ../imgs/bus.jpg --weights ../weights/last.torchscript.pt --view-img
+./demo --img ../imgs/bus.jpg --weights ../weights/last.torchscript.pt --view-img

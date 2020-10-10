@@ -1,15 +1,20 @@
-# pragma once
+//
+// Created by zbl on 2020/9/23.
+//
+
+#ifndef DEMO_DETECTOR_H
+#define DEMO_DETECTOR_H
+
 
 #include <memory>
 
-#include <torch/script.h>
 #include <torch/torch.h>
+#include <torch/script.h>
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 
-#include "utils.h"
 
 class Detector {
 public:
@@ -55,3 +60,6 @@ private:
   torch::Device device_;
   bool half_;
 };
+
+
+#endif //DEMO_DETECTOR_H

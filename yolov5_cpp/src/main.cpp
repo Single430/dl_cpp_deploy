@@ -1,3 +1,7 @@
+//
+// Created by zbl on 2020/9/23.
+//
+
 #include <iostream>
 #include <memory>
 #include <chrono>
@@ -7,24 +11,22 @@
 
 #define random(x) (rand()%x)
 
-std::vector<std::string> LoadNames(const std::string& path) {
-  // load class names
-  std::vector<std::string> class_names;
+std::vector<std::string> LoadLabels(const std::string& path) {
+  // load labels
+  std::vector<std::string> labels;
   std::ifstream infile(path);
   if (infile.is_open()) {
     std::string line;
-    while (getline (infile,line)) {
-      class_names.emplace_back(line);
+    while (getline(infile, line)) {
+      labels.emplace_back(line);
     }
     infile.close();
-  }
-  else {
-    std::cerr << "Error loading the class names!\n";
+  } else {
+    std::cerr << "Error Read Labels File!\n" << std::endl;
   }
 
-  return class_names;
+  return labels;
 }
-
 
 void Demo(cv::Mat& img,
           const std::vector<std::tuple<cv::Rect, float, int>>& data_vec,
@@ -68,61 +70,61 @@ void Demo(cv::Mat& img,
 
 
 int main(int argc, const char* argv[]) {
-  cxxopts::Options parser(argv[0], "A LibTorch inference implementation of the yolov5");
+  cxxopts::Options parser(argv[0], "LibTorch inference implementation for YoloV5.");
 
-  // TODO: add other args
+  // Parser
   parser.allow_unrecognised_options().add_options()
       ("weights", "model.torchscript.pt path", cxxopts::value<std::string>())
-      ("source", "source", cxxopts::value<std::string>())
-      ("conf-thres", "object confidence threshold", cxxopts::value<float>()->default_value("0.4"))
+      ("img", "a img path", cxxopts::value<std::string>())
+      ("labels", "a labels path", cxxopts::value<std::string>()->default_value("../weights/coco.names"))
+      ("conf-thres", "object confidence threshold", cxxopts::value<float>()->default_value("0.5"))
       ("iou-thres", "IOU threshold for NMS", cxxopts::value<float>()->default_value("0.7"))
       ("gpu", "Enable cuda device or cpu", cxxopts::value<bool>()->default_value("false"))
       ("view-img", "display results", cxxopts::value<bool>()->default_value("false"))
       ("h,help", "Print usage");
 
   auto opt = parser.parse(argc, argv);
-
   if (opt.count("help")) {
     std::cout << parser.help() << std::endl;
     exit(0);
   }
 
-  // check if gpu flag is set
+  // check gpu flag and set device type - CPU/GPU
   bool is_gpu = opt["gpu"].as<bool>();
-
-  // set device type - CPU/GPU
-  torch::DeviceType device_type;
+  torch::DeviceType deviceType;
   if (torch::cuda::is_available() && is_gpu) {
-    device_type = torch::kCUDA;
+    deviceType = torch::kCUDA;
   } else {
-    device_type = torch::kCPU;
+    deviceType = torch::kCPU;
   }
 
   // load class names from dataset for visualization
-  std::vector<std::string> class_names = LoadNames("../weights/coco.names");
-  if (class_names.empty()) {
+  std::vector<std::string> labels = LoadLabels(opt["labels"].as<std::string>());
+  if (labels.empty()) {
     return -1;
   }
 
   // load input image
-  std::string source = opt["source"].as<std::string>();
-  cv::Mat img = cv::imread(source);
+  std::string img_path = opt["img"].as<std::string>();
+  cv::Mat img = cv::imread(img_path);
   if (img.empty()) {
-    std::cerr << "Error loading the image!\n";
+    std::cerr << "Load img failed!\n" << std::endl;
     return -1;
   }
+  std::cout << "导入图片: " << opt["img"].as<std::string>() << std::endl;
 
-  // load network
-  std::string weights = opt["weights"].as<std::string>();
-  auto detector = Detector(weights, device_type);
+  // load model
+  std::string model_path = opt["weights"].as<std::string>();
+  auto detector = Detector(model_path, deviceType);
 
-  // inference
+//   inference
   float conf_thres = opt["conf-thres"].as<float>();
   float iou_thres = opt["iou-thres"].as<float>();
   auto result = detector.Run(img, conf_thres, iou_thres);
 
-  // visualize detections
+//   visualize detections
   if (opt["view-img"].as<bool>()) {
-    Demo(img, result, class_names);
+    Demo(img, result, labels);
   }
+
 }
