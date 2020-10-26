@@ -55,6 +55,24 @@ int main(int argc, const char* argv[]) {
   timer.start();
 
   detector.Detect(imgScale, boxes);
+  timer.end("识别完成...");
+  timer.start();
+
+  // draw image
+  for (long unsigned int j=0; j<boxes.size(); ++j) {
+    cv::Rect rect(boxes[j].x1/scale, boxes[j].y1/scale, boxes[j].x2/scale - boxes[j].x1/scale, boxes[j].y2/scale - boxes[j].y1/scale);
+    cv::rectangle(img, rect, cv::Scalar(0, 0, 255), 1, 8, 0);
+    char label[80];
+    sprintf(label, "%.4f", boxes[j].s);
+
+    cv::putText(img, label, cv::Size((boxes[j].x1/scale), boxes[j].y1/scale), cv::FONT_HERSHEY_COMPLEX, 0.5, cv::Scalar(0, 255, 255));
+    cv::circle(img, cv::Point(boxes[j].point[0]._x / scale, boxes[j].point[0]._y / scale), 1, cv::Scalar(0, 0, 225), 4);
+    cv::circle(img, cv::Point(boxes[j].point[1]._x / scale, boxes[j].point[1]._y / scale), 1, cv::Scalar(0, 255, 225), 4);
+    cv::circle(img, cv::Point(boxes[j].point[2]._x / scale, boxes[j].point[2]._y / scale), 1, cv::Scalar(255, 0, 225), 4);
+    cv::circle(img, cv::Point(boxes[j].point[3]._x / scale, boxes[j].point[3]._y / scale), 1, cv::Scalar(0, 255, 0), 4);
+    cv::circle(img, cv::Point(boxes[j].point[4]._x / scale, boxes[j].point[4]._y / scale), 1, cv::Scalar(255, 0, 0), 4);
+  }
+  cv::imwrite("test.png", img);
 
   return 0;
 }

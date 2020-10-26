@@ -41,7 +41,7 @@ public:
 
   inline void Release();
 
-//  void nms(std::vector<bbox> &input_boxes, float NMS_THRESH);
+  void nms(std::vector<bbox> &input_boxes, float NMS_THRESH);
 
   void Detect(cv::Mat& bgr, std::vector<bbox>& boxes);
 
