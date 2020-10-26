@@ -22,6 +22,7 @@ weights/last.torchscript.pt
 ```
 ./run.sh
 ```
+<img src="./face_detector_cpp/test.png" alt="在这里插入图片描述" style="zoom:60%;" />
 
 ## 环境相关
 ```
