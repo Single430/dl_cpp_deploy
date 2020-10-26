@@ -132,4 +132,6 @@ dmypy.json
 /cmake-build-debug/
 /run_local.sh
 
+*/.idea
+*/build
 */cmake-build-debug/

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1)
-project(demo)
+project(yolov5_cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall")
 
