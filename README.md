@@ -18,7 +18,7 @@
 weights/last.torchscript.pt
 ```
 
-### face_detector_cpp(ncnn)
+### face_detector_cpp(ncnn) 缺点： python和c++版差别有点大，尤其是在测试sample.jpg图片时，人脸检测的数量差别明显，有待优化
 ```
 ./run.sh
 ```
