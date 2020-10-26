@@ -1,6 +1,6 @@
 ## 项目目的
 
-用 C++ 部署 pytorch 训练的 mnist，yolov5s 模型
+用 C++ 部署 pytorch 训练的 mnist，yolov5s, retinaface(mobile0.25) 模型
 
 ## 目录介绍
 
@@ -16,6 +16,11 @@
 ### yolov5_cpp
 ```
 weights/last.torchscript.pt
+```
+
+### face_detector_cpp(ncnn)
+```
+./run.sh
 ```
 
 ## 环境相关
